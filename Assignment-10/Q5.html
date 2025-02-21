@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switcher</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        #darkButton {
+            background-color: #333;
+            color: white;
+        }
+        #lightButton {
+            background-color: #ddd;
+            color: black;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Theme Switcher</h1>
+    <p>This is a simple theme switcher that toggles between dark mode and light mode.</p>
+    
+    <button id="darkButton" onclick="setDarkMode()">Dark Mode</button>
+    <button id="lightButton" onclick="setLightMode()">Light Mode</button>
+
+    <script>
+        function setDarkMode() {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkButton').style.backgroundColor = '#555'; 
+            document.getElementById('lightButton').style.backgroundColor = '#ddd'; 
+        }
+
+        function setLightMode() {
+            document.body.classList.remove('dark-mode');
+            document.getElementById('lightButton').style.backgroundColor = '#bbb'; 
+            document.getElementById('darkButton').style.backgroundColor = '#333'; 
+        }
+    </script>
+</body>
+</html>

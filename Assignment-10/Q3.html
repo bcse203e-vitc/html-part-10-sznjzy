@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Order Form</title>
+</head>
+<body>
+    <h1>Pizza Order Form</h1>
+    <form id="pizzaForm">
+        <h2>Select Pizza Size:</h2>
+        <label>
+            <input type="radio" name="size" value="Small" required> Small
+        </label>
+        <label>
+            <input type="radio" name="size" value="Medium"> Medium
+        </label>
+        <label>
+            <input type="radio" name="size" value="Large"> Large
+        </label>
+
+        <h2>Select Toppings (You can select multiple):</h2>
+        <label>
+            <input type="checkbox" name="toppings" value="Cheese"> Cheese
+        </label>
+        <label>
+            <input type="checkbox" name="toppings" value="Pepperoni"> Pepperoni
+        </label>
+        <label>
+            <input type="checkbox" name="toppings" value="Mushrooms"> Mushrooms
+        </label>
+        <label>
+            <input type="checkbox" name="toppings" value="Olives"> Olives
+        </label>
+        <label>
+            <input type="checkbox" name="toppings" value="Bacon"> Bacon
+        </label>
+
+        <br><br>
+        <button type="button" onclick="submitOrder()">Submit Order</button>
+    </form>
+
+    <h2>Your Order Summary:</h2>
+    <p id="orderSummary"></p>
+
+    <script>
+        function submitOrder() {
+            const size = document.querySelector('input[name="size"]:checked');
+            
+            if (!size) {
+                alert("Please select a pizza size.");
+                return;
+            }
+
+            const selectedToppings = [];
+            const toppings = document.querySelectorAll('input[name="toppings"]:checked');
+            
+            toppings.forEach(topping => {
+                selectedToppings.push(topping.value);
+            });
+
+            const orderSummary = `
+                Pizza Size: ${size.value}<br>
+                Toppings: ${selectedToppings.length > 0 ? selectedToppings.join(', ') : 'No toppings selected'}
+            `;
+            
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+        }
+    </script>
+</body>
+</html>

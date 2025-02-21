@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Drawing App</title>
+    <style>
+        #canvas {
+            border: 1px solid #000;
+        }
+        #tools {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Drawing App</h1>
+
+    <!-- Color and Brush Size Options -->
+    <div id="tools">
+        <label for="color">Brush Color: </label>
+        <input type="color" id="color" value="#000000">
+        
+        <label for="size">Brush Size: </label>
+        <input type="range" id="size" min="1" max="10" value="5">
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <!-- Clear Canvas Button -->
+    <button onclick="clearCanvas()">Clear Canvas</button>
+
+    <script>
+        // Get references to canvas and context
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set initial brush settings
+        let brushColor = document.getElementById("color").value;
+        let brushSize = document.getElementById("size").value;
+
+        // Set up canvas for drawing
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+
+        // Flag to track mouse events
+        let isDrawing = false;
+
+        // Mouse down event (start drawing)
+        canvas.addEventListener("mousedown", (e) => {
+            isDrawing = true;
+            draw(e); // Start drawing immediately when mouse is pressed
+        });
+
+        // Mouse move event (draw while mouse is moving)
+        canvas.addEventListener("mousemove", (e) => {
+            if (isDrawing) {
+                draw(e); // Keep drawing while mouse moves
+            }
+        });
+
+        // Mouse up event (stop drawing)
+        canvas.addEventListener("mouseup", () => {
+            isDrawing = false;
+            ctx.beginPath(); // Reset the path to avoid connecting lines between draws
+        });
+
+        // Mouse leave event (stop drawing if the mouse leaves the canvas)
+        canvas.addEventListener("mouseleave", () => {
+            isDrawing = false;
+            ctx.beginPath();
+        });
+
+        // Draw on the canvas
+        function draw(e) {
+            ctx.strokeStyle = brushColor; // Set the brush color
+            ctx.lineWidth = brushSize; // Set the brush size
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop); // Draw line
+            ctx.stroke(); // Apply the drawing
+            ctx.beginPath(); // Start a new path for the next segment
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        }
+
+        document.getElementById("color").addEventListener("input", (e) => {
+            brushColor = e.target.value;
+        });
+
+        document.getElementById("size").addEventListener("input", (e) => {
+            brushSize = e.target.value;
+        });
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        }
+    </script>
+
+</body>
+</html>

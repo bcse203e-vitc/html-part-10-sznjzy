@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layered Image Gallery</title>
+</head>
+<body>
+
+    <h1>Layered Image Gallery</h1>
+
+    <div id="imageGallery" style="position: relative; width: 300px; height: 300px;">
+        <img id="image1" src="./imag1.jpg" 
+             style="position: absolute; top: 0; left: 0; z-index: 1;" onclick="bringToFront('image1')" />
+        
+        <img id="image2" src="./image3.jpg" 
+             style="position: absolute; top: 0; left: 0; z-index: 2;" onclick="bringToFront('image2')" />
+        
+        <img id="image3" src="./image2.jpg" 
+             style="position: absolute; top: 0; left: 0; z-index: 3;" onclick="bringToFront('image3')" />
+    </div>
+
+    <script>
+        function bringToFront(imageId) {
+            let images = document.querySelectorAll('img');
+            images.forEach(function(image) {
+                image.style.zIndex = '1'; 
+            });
+
+            document.getElementById(imageId).style.zIndex = '10'; 
+        }
+    </script>
+
+</body>
+</html>

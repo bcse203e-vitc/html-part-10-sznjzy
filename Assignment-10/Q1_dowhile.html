@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game (Do...While Loop)</title>
+</head>
+<body>
+    <h1>Number Guessing Game (Do...While Loop)</h1>
+    <p>Guess a number between 1 and 50.</p>
+    <input type="number" id="guess" placeholder="Enter your guess" />
+    <button onclick="guessNumberDoWhile()">Guess</button>
+    <p id="result"></p>
+    <p id="guessCount"></p>
+
+    <script>
+        const targetNumber = Math.floor(Math.random() * 50) + 1;  
+        let guessCount = 0;  
+
+        function guessNumberDoWhile() {
+            const guess = document.getElementById("guess").value;
+            const result = document.getElementById("result");
+            const guessCountElement = document.getElementById("guessCount");
+
+            guessCount++; 
+
+            if (parseInt(guess) === targetNumber) {
+                result.textContent = "Congratulations! You guessed the correct number.";
+                guessCountElement.textContent = `It took you ${guessCount} guesses.`;
+            } else if (parseInt(guess) < targetNumber) {
+                result.textContent = "Your guess is too low. Try again!";
+            } else if (parseInt(guess) > targetNumber) {
+                result.textContent = "Your guess is too high. Try again!";
+            }
+        }
+    </script>
+</body>
+</html>
